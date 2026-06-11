@@ -1,0 +1,307 @@
+/* ==== RESET / BASE ==== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    color: #333;
+    line-height: 1.7;
+    background: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==== HEADER ==== */
+.site-header {
+    border-bottom: 1px solid #eee;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+.main-nav a {
+    font-weight: 600;
+    transition: color .2s;
+}
+
+.main-nav a:hover {
+    color: #0a4f8c;
+}
+
+.header-info {
+    background: #0a4f8c;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 0;
+}
+
+/* ==== HERO ==== */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f4f9ff 0%, #eef5fc 100%);
+    text-align: center;
+}
+
+.hero-decor .decor {
+    position: absolute;
+    opacity: .8;
+    pointer-events: none;
+}
+
+.hero-decor .line-shape { top: 0; left: 0; width: 220px; }
+.hero-decor .ellipse    { bottom: -40px; right: -40px; width: 200px; }
+.hero-decor .stars-2-a  { top: 40px; right: 10%; width: 30px; }
+.hero-decor .stars-1    { bottom: 30%; left: 8%; width: 24px; }
+.hero-decor .stars-2-b  { top: 20%; left: 25%; width: 20px; }
+.hero-decor .start      { bottom: 15%; right: 20%; width: 28px; }
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.hero-content h1 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    color: #0a4f8c;
+}
+
+.hero-content p {
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+/* ==== BUTTONS ==== */
+.btn {
+    display: inline-block;
+    padding: 12px 36px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all .2s;
+}
+
+.btn-primary {
+    background: #0a4f8c;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #07396b;
+}
+
+/* ==== BUSINESS SECTION ==== */
+.business-section {
+    padding: 70px 0;
+}
+
+.business-images {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.business-images img {
+    max-width: 280px;
+}
+
+.business-intro-bold {
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.business-intro {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 40px;
+    color: #555;
+}
+
+.business-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.business-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+
+.business-card img {
+    margin: 0 auto 16px;
+    border-radius: 8px;
+}
+
+.business-list {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #f4f9ff;
+    border-radius: 12px;
+    padding: 24px 32px;
+}
+
+.business-list li {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 6px;
+}
+
+/* ==== COMPANY SECTION ==== */
+.company-section {
+    background: #f8fafc;
+    padding: 70px 0;
+}
+
+.company-section h2 {
+    margin-bottom: 24px;
+    color: #0a4f8c;
+}
+
+.company-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+}
+
+.company-info p {
+    margin-bottom: 14px;
+}
+
+.map-embed {
+    margin: 16px 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.company-image img {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+
+/* ==== CONTACT SECTION ==== */
+.contact-section {
+    padding: 70px 0;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0a4f8c;
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.contact-form .required {
+    color: #d33;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.contact-form button {
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.alert-success {
+    background: #e6f7e9;
+    color: #1a7d34;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ==== FOOTER ==== */
+.site-footer {
+    background: #0a4f8c;
+    color: #fff;
+    text-align: center;
+    padding: 24px 0;
+    font-size: 14px;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 768px) {
+    .company-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-top {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .main-nav ul {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
