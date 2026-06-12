@@ -36,6 +36,15 @@ img {
 /* ==== HEADER ==== */
 .site-header {
     border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    transition: box-shadow .25s ease;
+}
+
+.site-header.scrolled {
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
 }
 
 .header-top {
@@ -58,11 +67,30 @@ img {
 
 .main-nav a {
     font-weight: 600;
+    position: relative;
+    padding-bottom: 4px;
     transition: color .2s;
 }
 
-.main-nav a:hover {
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: #0a4f8c;
+    transition: width .25s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
     color: #0a4f8c;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
 }
 
 .header-info {
@@ -182,7 +210,6 @@ img {
 }
 
 .business-list {
-    max-width: 700px;
     margin: 0 auto;
     background: #f4f9ff;
     border-radius: 12px;
@@ -277,6 +304,19 @@ img {
     border-radius: 6px;
     margin-bottom: 20px;
     text-align: center;
+}
+
+/* ==== MAP SECTION (FULL WIDTH) ==== */
+.map-section {
+    width: 100%;
+    line-height: 0;
+}
+
+.map-section iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+    display: block;
 }
 
 /* ==== FOOTER ==== */
