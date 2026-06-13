@@ -1,4 +1,4 @@
-/* ===== Theme variables (chuyển từ index.css gốc) ===== */
+/* ===== Theme variables (chuy?n t? index.css g?c) ===== */
 :root {
   --radius: 0.25rem;
   --background: oklch(0.975 0.012 145);
@@ -61,7 +61,7 @@ body {
 
 /* ===== Animation thay cho framer-motion (motion/react) ===== */
 
-/* Phần tử sẽ ẩn + dịch xuống, khi có class .is-visible (do JS thêm khi vào viewport) sẽ hiện ra */
+/* Ph?n t? s? ?n + d?ch xu?ng, khi c� class .is-visible (do JS th�m khi v�o viewport) s? hi?n ra */
 .fade-up {
   opacity: 0;
   transform: translateY(30px);
@@ -82,7 +82,7 @@ body {
   transform: translateX(0);
 }
 
-/* Hero animation - tự chạy khi load trang */
+/* Hero animation - t? ch?y khi load trang */
 .hero-fade {
   opacity: 0;
   transform: translateY(40px);
