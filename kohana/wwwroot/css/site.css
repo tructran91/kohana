@@ -1,307 +1,134 @@
-/* ==== RESET / BASE ==== */
+/* ===== Theme variables (chuyển từ index.css gốc) ===== */
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.975 0.012 145);
+  --foreground: oklch(0.18 0.04 145);
+  --card: oklch(0.99 0.006 145);
+  --card-foreground: oklch(0.18 0.04 145);
+  --popover: oklch(0.99 0.006 145);
+  --popover-foreground: oklch(0.18 0.04 145);
+  --primary: oklch(0.40 0.13 145);
+  --primary-foreground: oklch(0.97 0.01 145);
+  --secondary: oklch(0.92 0.025 145);
+  --secondary-foreground: oklch(0.18 0.04 145);
+  --muted: oklch(0.92 0.02 145);
+  --muted-foreground: oklch(0.5 0.04 145);
+  --accent: oklch(0.87 0.045 145);
+  --accent-foreground: oklch(0.18 0.04 145);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.86 0.03 145);
+  --input: oklch(0.86 0.03 145);
+  --ring: oklch(0.40 0.13 145);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  border-color: var(--border);
+}
+
+html, body {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 body {
-    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-    color: #333;
-    line-height: 1.7;
-    background: #fff;
+  font-family: "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+.font-serif-jp {
+  font-family: "Noto Serif JP", serif;
 }
 
-ul {
-    list-style: none;
+/* ===== Animation thay cho framer-motion (motion/react) ===== */
+
+/* Phần tử sẽ ẩn + dịch xuống, khi có class .is-visible (do JS thêm khi vào viewport) sẽ hiện ra */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-img {
-    max-width: 100%;
-    display: block;
+.fade-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+.fade-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.container {
-    width: 100%;
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* Hero animation - tự chạy khi load trang */
+.hero-fade {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: heroFadeUp 1s ease-out forwards;
+}
+.hero-logo {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: heroScaleIn 0.9s ease-out 0.2s forwards;
+}
+.hero-line {
+  width: 0;
+  animation: heroLineGrow 0.8s ease-out 0.7s forwards;
+}
+.hero-text-1 {
+  opacity: 0;
+  animation: heroFadeIn 0.8s ease-out 0.5s forwards;
+}
+.hero-text-2 {
+  opacity: 0;
+  animation: heroFadeIn 0.8s ease-out 0.8s forwards;
+}
+.hero-buttons {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeUp 0.6s ease-out 1s forwards;
 }
 
-/* ==== HEADER ==== */
-.site-header {
-    border-bottom: 1px solid #eee;
+@keyframes heroFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeIn {
+  to { opacity: 1; }
+}
+@keyframes heroScaleIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes heroLineGrow {
+  to { width: 96px; }
 }
 
-.header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 20px;
-    flex-wrap: wrap;
+/* Scroll indicator bounce */
+.scroll-indicator {
+  animation: scrollBounce 2s ease-in-out infinite;
 }
-
-.logo img {
-    height: 60px;
-    width: auto;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: 30px;
-}
-
-.main-nav a {
-    font-weight: 600;
-    transition: color .2s;
-}
-
-.main-nav a:hover {
-    color: #0a4f8c;
-}
-
-.header-info {
-    background: #0a4f8c;
-    color: #fff;
-    font-size: 13px;
-    text-align: center;
-    padding: 8px 0;
-}
-
-/* ==== HERO ==== */
-.hero {
-    position: relative;
-    overflow: hidden;
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f4f9ff 0%, #eef5fc 100%);
-    text-align: center;
-}
-
-.hero-decor .decor {
-    position: absolute;
-    opacity: .8;
-    pointer-events: none;
-}
-
-.hero-decor .line-shape { top: 0; left: 0; width: 220px; }
-.hero-decor .ellipse    { bottom: -40px; right: -40px; width: 200px; }
-.hero-decor .stars-2-a  { top: 40px; right: 10%; width: 30px; }
-.hero-decor .stars-1    { bottom: 30%; left: 8%; width: 24px; }
-.hero-decor .stars-2-b  { top: 20%; left: 25%; width: 20px; }
-.hero-decor .start      { bottom: 15%; right: 20%; width: 28px; }
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
-}
-
-.hero-content h1 {
-    font-size: 2.4rem;
-    margin-bottom: 20px;
-    color: #0a4f8c;
-}
-
-.hero-content p {
-    margin-bottom: 30px;
-    font-size: 1rem;
-}
-
-/* ==== BUTTONS ==== */
-.btn {
-    display: inline-block;
-    padding: 12px 36px;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: all .2s;
-}
-
-.btn-primary {
-    background: #0a4f8c;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background: #07396b;
-}
-
-/* ==== BUSINESS SECTION ==== */
-.business-section {
-    padding: 70px 0;
-}
-
-.business-images {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
-
-.business-images img {
-    max-width: 280px;
-}
-
-.business-intro-bold {
-    font-weight: 700;
-    text-align: center;
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-}
-
-.business-intro {
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto 40px;
-    color: #555;
-}
-
-.business-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-bottom: 40px;
-}
-
-.business-card {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,.05);
-}
-
-.business-card img {
-    margin: 0 auto 16px;
-    border-radius: 8px;
-}
-
-.business-list {
-    max-width: 700px;
-    margin: 0 auto;
-    background: #f4f9ff;
-    border-radius: 12px;
-    padding: 24px 32px;
-}
-
-.business-list li {
-    list-style: disc;
-    margin-left: 20px;
-    margin-bottom: 6px;
-}
-
-/* ==== COMPANY SECTION ==== */
-.company-section {
-    background: #f8fafc;
-    padding: 70px 0;
-}
-
-.company-section h2 {
-    margin-bottom: 24px;
-    color: #0a4f8c;
-}
-
-.company-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 40px;
-}
-
-.company-info p {
-    margin-bottom: 14px;
-}
-
-.map-embed {
-    margin: 16px 0;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.company-image img {
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,.08);
-}
-
-/* ==== CONTACT SECTION ==== */
-.contact-section {
-    padding: 70px 0;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.contact-section h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #0a4f8c;
-}
-
-.contact-form .form-group {
-    margin-bottom: 20px;
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-}
-
-.contact-form .required {
-    color: #d33;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: inherit;
-}
-
-.contact-form button {
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-.alert-success {
-    background: #e6f7e9;
-    color: #1a7d34;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* ==== FOOTER ==== */
-.site-footer {
-    background: #0a4f8c;
-    color: #fff;
-    text-align: center;
-    padding: 24px 0;
-    font-size: 14px;
-}
-
-/* ==== RESPONSIVE ==== */
-@media (max-width: 768px) {
-    .company-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .header-top {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .main-nav ul {
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
 }

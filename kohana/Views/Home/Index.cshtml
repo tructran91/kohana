@@ -1,181 +1,320 @@
+@model HomeViewModel
 @{
-    ViewData["Title"] = "トップ";
-    Layout = "_Layout";
+    ViewData["Title"] = "ホーム";
+    var logoUrl = "https://hercules-cdn.com/file_xP2rW5J5IEDj7LQIcHLg7GIc";
 }
 
-<!-- ===== HEADER ===== -->
-<header class="site-header">
-    <div class="container header-top">
-        <a href="/" class="logo">
-            <img src="~/images/logo-s.png" alt="VJC国際貿易株式会社" />
-        </a>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="/">トップ</a></li>
-                <li><a href="#jigyou">貿易事業</a></li>
-                <li><a href="#shoukai">会社概要</a></li>
-                <li><a href="#lienhe">お問い合せ</a></li>
-            </ul>
+<!-- ===== Header (Fixed Nav) ===== -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur border-b border-border">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+        <!-- Logo -->
+        <button data-scroll-to="hero" class="flex items-center gap-1 cursor-pointer group">
+            <img src="@logoUrl" alt="KOHANA" class="h-10 w-10 object-contain mix-blend-multiply" />
+            <span class="text-[11px] text-muted-foreground leading-tight hidden sm:block tracking-wide">
+                国際貿易株式会社
+            </span>
+        </button>
+
+        <!-- Nav Links (desktop) -->
+        <nav class="hidden md:flex items-center gap-8">
+            @foreach (var item in Model.NavItems)
+            {
+                <button data-scroll-to="@item.Id"
+                        class="text-sm text-foreground/70 hover:text-primary transition-colors cursor-pointer tracking-wide relative group">
+                    @item.Label
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all group-hover:w-full"></span>
+                </button>
+            }
         </nav>
-    </div>
-    <div class="header-info">
-        <div class="container">
-            電話番号：047-466-8658｜ 営業時間：平日 AM10:00〜PM7:00｜ 住所：千葉県船橋市大穴南1丁目40番6号
+
+        <!-- Nav Links (mobile) -->
+        <div class="flex md:hidden gap-4">
+            @foreach (var item in Model.NavItems)
+            {
+                <button data-scroll-to="@item.Id"
+                        class="text-xs text-foreground/60 hover:text-primary transition-colors cursor-pointer">
+                    @item.ShortLabel
+                </button>
+            }
         </div>
     </div>
 </header>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-    <div class="hero-decor">
-        <img src="~/images/hero-line-shape.png" class="decor line-shape" alt="" />
-        <img src="~/images/hero-ellipse.png" class="decor ellipse" alt="" />
-        <img src="~/images/stars-2.png" class="decor stars-2-a" alt="" />
-        <img src="~/images/stars-1.png" class="decor stars-1" alt="" />
-        <img src="~/images/stars-2.png" class="decor stars-2-b" alt="" />
-        <img src="~/images/start.png" class="decor start" alt="" />
-    </div>
-    <div class="container hero-content">
-        <h1>VJCとは？</h1>
-        <p>
-            VJC国際貿易株式会社は、お客様へ高品質な製品・サービスを提供するだけでなく、
-            お客様と共に考え協力しながら競争と共存共栄の中で成長をしていきます。
+<!-- ===== Hero ===== -->
+<section id="hero" class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+         style="background: linear-gradient(160deg, oklch(0.94 0.03 145) 0%, oklch(0.975 0.012 145) 50%, oklch(0.92 0.04 155) 100%);">
+
+    <!-- Decorative vertical lines -->
+    <div class="absolute left-16 top-0 bottom-0 w-px bg-border hidden lg:block"></div>
+    <div class="absolute right-16 top-0 bottom-0 w-px bg-border hidden lg:block"></div>
+
+    <!-- Japanese pattern circles -->
+    <div class="absolute top-24 right-24 w-64 h-64 rounded-full border border-primary/10 opacity-60"></div>
+    <div class="absolute top-32 right-32 w-48 h-48 rounded-full border border-primary/10 opacity-40"></div>
+    <div class="absolute bottom-32 left-20 w-80 h-80 rounded-full border border-primary/8 opacity-50"></div>
+
+    <div class="hero-fade text-center z-10 px-6">
+        <!-- Logo -->
+        <div class="hero-logo flex justify-center mb-2">
+            <img src="@logoUrl" alt="KOHANA"
+                 class="w-44 h-44 md:w-56 md:h-56 object-contain mix-blend-multiply" />
+        </div>
+
+        <div class="hero-line w-24 h-px bg-primary/30 mx-auto mb-6"></div>
+
+        <p class="hero-text-1 text-lg md:text-2xl font-light text-foreground/70 tracking-widest mb-2 font-serif-jp">
+            国際貿易株式会社
         </p>
-        <a href="#jigyou" class="btn btn-primary">詳細</a>
+
+        <p class="hero-text-2 text-sm text-muted-foreground tracking-widest mt-2">
+            日本とアジアの架け橋
+        </p>
+
+        <div class="hero-buttons mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+            <button data-scroll-to="about"
+                    class="px-8 py-3 bg-primary text-primary-foreground text-sm tracking-widest hover:bg-primary/90 transition-colors cursor-pointer">
+                会社について
+            </button>
+            <button data-scroll-to="contact"
+                    class="px-8 py-3 border border-primary text-primary text-sm tracking-widest hover:bg-primary/5 transition-colors cursor-pointer">
+                お問い合せ
+            </button>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div data-scroll-to="about"
+         class="scroll-indicator absolute bottom-8 flex flex-col items-center gap-2 cursor-pointer text-muted-foreground">
+        <span class="text-xs tracking-widest">SCROLL</span>
+        <i data-lucide="chevron-down" class="w-4 h-4"></i>
     </div>
 </section>
 
-<!-- ===== 貿易事業 (BUSINESS SECTIONS) ===== -->
-<section id="jigyou" class="business-section">
-    <div class="container">
-        <div class="business-images">
-            <img src="~/images/5.png" alt="VJC事業1" />
-            <img src="~/images/6.png" alt="VJC事業2" />
+<!-- ===== About Section ===== -->
+<section id="about" class="py-28 px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="fade-up">
+            @await Html.PartialAsync("_SectionTitle", ("KOHANAとは？", "ABOUT US"))
+
+            <div class="mt-12 grid md:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6">
+                    <p class="text-foreground/80 leading-8 tracking-wide">
+                        KOHANA国際貿易株式会社は、お客様へ高品質な製品・サービスを提供するだけでなく、お客様と共に考え協力しながら競争と共存共栄の中で成長をしていきます。
+                    </p>
+                    <p class="text-foreground/80 leading-8 tracking-wide">
+                        お客様のニーズに応える高品質な商品を提供し、<strong>日本とアジアの架け橋</strong>となることを目指しています。
+                    </p>
+
+                    <div class="border-l-2 border-primary pl-5 space-y-2 mt-6">
+                        @foreach (var line in new[]
+                        {
+                            "日本のサプリメント、化粧品、健康食品、日用品、薬品、衣類品",
+                            "ベトナムへ輸出・国内販売",
+                            "自社ブランドの開発",
+                            "輸出入: 航空便・船便",
+                            "国内: 卸売・ネット販売",
+                        })
+                        {
+                            <p class="text-sm text-foreground/70 leading-7 tracking-wide">・@line</p>
+                        }
+                    </div>
+                </div>
+
+                <!-- Decorative logo element -->
+                <div class="flex items-center justify-center">
+                    <div class="relative w-64 h-64">
+                        <div class="absolute inset-0 border border-primary/15 rotate-12"></div>
+                        <div class="absolute inset-4 border border-primary/10 rotate-6"></div>
+                        <div class="absolute inset-8 border border-primary/8 rotate-3"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <img src="@logoUrl" alt="KOHANA" class="w-40 h-40 object-contain mix-blend-multiply" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <p class="business-intro-bold">
-            VJC国際貿易株式会社は、以下の3つの主要事業を展開している国際貿易企業です。
-        </p>
-        <p class="business-intro">
-            お客様のニーズに応える高品質な商品を提供し、日本とアジアの架け橋となることを目指しています。
-        </p>
-
-        <div class="business-cards">
-            <div class="business-card">
-                <img src="~/img/2.png" alt="輸出入事業" />
-                <p>
-                    日本国内の健康・医療関連商品、サプリメント、日用品などをベトナムへ輸出するとともに、
-                    ベトナムおよび中国からの多様な商品を日本へ輸入しております。
-                </p>
-            </div>
-            <div class="business-card">
-                <img src="~/img/3.png" alt="国内販売事業" />
-                <p>
-                    輸入商品だけでなく、日本国内の高品質な製品も取り扱い、
-                    全国の小売市場およびオンラインを通じて販売しています。
-                </p>
-            </div>
-            <div class="business-card">
-                <img src="~/img/kinh.png" alt="自社ブランド事業" />
-                <p>
-                    当社が登録したブランドに基づき、オリジナル製品を企画・製造し、国内外に向けて販売しています。
-                </p>
-            </div>
-        </div>
-
-        <ul class="business-list">
-            <li>日本のサプリメント、化粧品、健康食品、日用品、薬品、衣類品を中心として</li>
-            <li>ベトナムへ輸出、国内販売。</li>
-            <li>その他に自社ブランドの開発を行っています。</li>
-            <li>取引形態</li>
-            <li>ベトナムへ輸出入 航空便、船便</li>
-            <li>日本国内売り: 他社へ卸売、ネット販売</li>
-        </ul>
     </div>
 </section>
 
-<!-- ===== 会社概要 (COMPANY INFO) ===== -->
-<section id="shoukai" class="company-section">
-    <div class="container company-grid">
-        <div class="company-info">
-            <h2>会社概要</h2>
+<!-- Divider -->
+<div class="max-w-4xl mx-auto px-6">
+    <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+</div>
 
-            <p><strong>会社名</strong><br />VJC国際貿易株式会社</p>
+<!-- ===== Business Section ===== -->
+<section id="business" class="py-28 px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="fade-up">
+            @await Html.PartialAsync("_SectionTitle", ("事業内容", "BUSINESS"))
 
-            <p><strong>代表者</strong><br />チャン バン ティン</p>
-
-            <p>
-                <strong>本社</strong> 〒274-0067<br />
-                千葉県船橋市大穴南1丁目40番6号<br />
-                VJC国際貿易株式会社は、以下の3つの主要事業を展開している国際貿易企業です。
+            <p class="mt-8 text-center text-foreground/70 leading-8 tracking-wide max-w-xl mx-auto">
+                KOHANA国際貿易株式会社は、以下の3つの主要事業を展開している国際貿易企業です。
             </p>
 
-            <div class="map-embed">
-                <iframe
-                    src="https://maps.google.com/maps?q=VJC%E5%9B%BD%E9%9A%9B%E8%B2%BF%E6%98%93%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%201%20Chome-40-6%20Oanaminami%2C%20Funabashi%2C%20Chiba%20274-0067&t=m&z=10&output=embed&iwloc=near"
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
-                </iframe>
+            <div class="mt-14 grid md:grid-cols-3 gap-8">
+                @for (int i = 0; i < Model.Businesses.Count; i++)
+                {
+                    var biz = Model.Businesses[i];
+                    <div class="fade-up group border border-border hover:border-primary/40 transition-all duration-300 bg-card hover:shadow-sm overflow-hidden"
+                         style="transition-delay:@(i * 150)ms">
+                        <!-- Image -->
+                        <div class="relative h-48 overflow-hidden bg-muted">
+                            <img src="@biz.Image" alt="@biz.Title"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-primary/10 group-hover:bg-primary/5 transition-colors duration-300"></div>
+                            <span class="absolute top-3 right-4 text-4xl font-bold text-white/20 font-serif-jp">
+                                @((i + 1).ToString("00"))
+                            </span>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-primary mb-3">
+                                <i data-lucide="@biz.Icon" class="w-[18px] h-[18px]"></i>
+                                <h3 class="text-base font-semibold tracking-wide font-serif-jp">@biz.Title</h3>
+                            </div>
+                            <p class="text-sm text-foreground/65 leading-7 tracking-wide">
+                                @biz.Description
+                            </p>
+                        </div>
+                    </div>
+                }
             </div>
+        </div>
+    </div>
+</section>
 
-            <p>松戸倉庫 〒370-0615 群馬県邑楽郡邑楽町篠塚1624-1</p>
+<!-- Divider -->
+<div class="max-w-4xl mx-auto px-6">
+    <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+</div>
 
-            <p><strong>電話番号</strong> TEL : 047-466-8658</p>
+<!-- ===== Company Section ===== -->
+<section id="company" class="py-28 px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="fade-up">
+            @await Html.PartialAsync("_SectionTitle", ("会社概要", "COMPANY"))
 
-            <p><strong>設立</strong> 令和5年8月2日</p>
-
-            <p><strong>資本金</strong> 5,000,000円</p>
-
-            <div>
-                <strong>取引先銀行</strong>
-                <p>
-                    楽天銀行 第３営業支店 GMOあおぞらネット銀行 法人第2営業部支店<br />
-                    古物商許可 第441360002010号
+            <div class="mt-12 flex items-start gap-4">
+                <i data-lucide="building-2" class="w-5 h-5 text-primary mt-1 shrink-0"></i>
+                <p class="text-sm text-foreground/70 leading-7 tracking-wide">
+                    KOHANA国際貿易株式会社は、以下の3つの主要事業を展開している国際貿易企業です。
                 </p>
             </div>
-        </div>
 
-        <div class="company-image">
-            <img src="~/images/Anh-Web-vjckokusai.png" alt="Ảnh Web vjckokusai" />
+            <div class="mt-10 border border-border">
+                @foreach (var info in Model.CompanyInfo)
+                {
+                    <div class="fade-left flex border-b border-border last:border-b-0">
+                        <div class="w-36 md:w-44 shrink-0 bg-muted px-5 py-4 text-sm font-medium tracking-wide text-foreground/80">
+                            @info.Label
+                        </div>
+                        <div class="px-5 py-4 text-sm text-foreground/70 leading-6 tracking-wide">
+                            @info.Value
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Map -->
+            <div class="fade-up mt-12">
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-lucide="map-pin" class="w-[14px] h-[14px] text-primary"></i>
+                    <span class="text-xs tracking-widest text-foreground/60 uppercase">
+                        本社所在地 — 千葉県船橋市大穴南1丁目40番6号
+                    </span>
+                </div>
+                <div class="border border-border overflow-hidden" style="height:340px">
+                    <div id="company-map"
+                         data-lat="@Model.MapLat.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                         data-lng="@Model.MapLng.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                         data-zoom="@Model.MapZoom"
+                         style="height:100%;width:100%"></div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ===== お問い合せ (CONTACT FORM) ===== -->
-<section id="lienhe" class="contact-section">
-    <div class="container">
-        <h2>お問い合せ</h2>
+<!-- Divider -->
+<div class="max-w-4xl mx-auto px-6">
+    <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+</div>
 
-        @if (TempData["ContactSuccess"] != null)
-        {
-            <div class="alert alert-success">送信ありがとうございました。</div>
-        }
+<!-- ===== Contact Section ===== -->
+<section id="contact" class="py-28 px-6">
+    <div class="max-w-2xl mx-auto">
+        <div class="fade-up">
+            @await Html.PartialAsync("_SectionTitle", ("お問い合せ", "CONTACT"))
 
-        <form asp-controller="Contact" asp-action="Submit" method="post" class="contact-form">
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                <label for="Name">お名前 (必須) <span class="required">*</span></label>
-                <input type="text" id="Name" name="Name" required />
+            <div class="mt-8 flex flex-wrap gap-6 justify-center mb-12">
+                <div class="flex items-center gap-2 text-sm text-foreground/60">
+                    <i data-lucide="phone" class="w-[14px] h-[14px] text-primary"></i>
+                    <span>047-466-8658</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-foreground/60">
+                    <i data-lucide="map-pin" class="w-[14px] h-[14px] text-primary"></i>
+                    <span>千葉県船橋市大穴南1丁目40番6号</span>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="Email">メールアドレス (必須) <span class="required">*</span></label>
-                <input type="email" id="Email" name="Email" required />
-            </div>
+            @if (TempData["ContactSuccess"] != null)
+            {
+                <p class="text-center text-sm text-primary mb-6">メッセージを送信しました。</p>
+            }
 
-            <div class="form-group">
-                <label for="Message">メッセージ本文</label>
-                <textarea id="Message" name="Message" rows="6"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">送信</button>
-        </form>
+            <form id="contact-form" class="space-y-5" method="post" action="@Url.Action("Contact", "Home")">
+                @Html.AntiForgeryToken()
+                <div>
+                    <label class="block text-xs tracking-widest text-foreground/60 mb-2 uppercase">
+                        お名前 <span class="text-primary">*</span>
+                    </label>
+                    <input required type="text" name="name" placeholder="山田 太郎"
+                           class="w-full border border-border bg-card px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors" />
+                </div>
+                <div>
+                    <label class="block text-xs tracking-widest text-foreground/60 mb-2 uppercase">
+                        メールアドレス <span class="text-primary">*</span>
+                    </label>
+                    <input required type="email" name="email" placeholder="example@email.com"
+                           class="w-full border border-border bg-card px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors" />
+                </div>
+                <div>
+                    <label class="block text-xs tracking-widest text-foreground/60 mb-2 uppercase">
+                        メッセージ本文
+                    </label>
+                    <textarea rows="5" name="message" placeholder="お問い合せ内容をご記入ください"
+                              class="w-full border border-border bg-card px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
+                </div>
+                <div class="flex justify-center pt-4">
+                    <button type="submit"
+                            class="px-12 py-3 bg-primary text-primary-foreground text-sm tracking-widest hover:bg-primary/90 transition-colors cursor-pointer">
+                        送信
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer">
-    <div class="container">
-        <p>&copy; 2023 VJC国際貿易株式会社. All rights reserved.</p>
+<!-- ===== Footer ===== -->
+<footer class="border-t border-border py-10 px-6 bg-muted/30">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+            <img src="@logoUrl" alt="KOHANA" class="h-9 w-9 object-contain mix-blend-multiply" />
+            <span class="text-xs text-muted-foreground tracking-wide">国際貿易株式会社</span>
+        </div>
+        <div class="flex gap-6">
+            @foreach (var item in Model.NavItems)
+            {
+                <button data-scroll-to="@item.Id"
+                        class="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer tracking-wide">
+                    @item.Label
+                </button>
+            }
+        </div>
+        <p class="text-xs text-muted-foreground">
+            &copy; @DateTime.Now.Year KOHANA国際貿易株式会社
+        </p>
     </div>
 </footer>
